@@ -160,14 +160,14 @@
     font-size: 92px;
     line-height: 1;
     color: var(--accent);
-    opacity: 0.06;
+    opacity: 0.14;
     position: absolute;
     top: 12px; right: 18px;
     user-select: none;
     pointer-events: none;
     transition: opacity .35s;
   }
-  .phrase-card:hover .badge-num { opacity: 0.12; }
+  .phrase-card:hover .badge-num { opacity: 0.26; }
 
   /* ========== TELEGRAM-STYLE VOICE PLAYER ========== */
   .voice-player {
@@ -362,7 +362,7 @@
 
   /* Адаптив */
   @media (max-width: 640px) {
-    .badge-num { font-size: 68px; }
+    .badge-num { font-size: 72px; opacity: 0.2; }
     .pill { font-size: 15px; padding: 8px 13px 9px; }
     .voice-player { padding: 4px 12px 4px 4px; gap: 8px; }
     .vp-play { width: 30px; height: 30px; }
