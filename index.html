@@ -154,20 +154,41 @@
     line-height: 1.55;
   }
 
-  .badge-num {
+  /* Яскрава плашка з номером */
+  .num-row {
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 11;
+  }
+  .num-chip {
+    display: inline-block;
     font-family: 'Bricolage Grotesque', sans-serif;
     font-weight: 800;
-    font-size: 92px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
     line-height: 1;
-    color: var(--accent);
-    opacity: 0.14;
-    position: absolute;
-    top: 12px; right: 18px;
+    color: #0a0a0b;
+    background: var(--accent);
+    padding: 5px 14px 6px;
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(20,240,200,0.4);
     user-select: none;
-    pointer-events: none;
-    transition: opacity .35s;
+    transition: transform .3s, box-shadow .3s;
   }
-  .phrase-card:hover .badge-num { opacity: 0.26; }
+  .phrase-card:hover .num-chip {
+    transform: scale(1.06);
+    box-shadow: 0 6px 22px rgba(20,240,200,0.6);
+  }
+  @media (min-width: 640px) {
+    .num-row {
+      position: absolute;
+      top: 18px; right: 20px;
+      margin: 0;
+      text-align: right;
+    }
+    .num-chip { font-size: 15px; padding: 5px 15px 6px; }
+  }
 
   /* ========== TELEGRAM-STYLE VOICE PLAYER ========== */
   .voice-player {
@@ -362,7 +383,6 @@
 
   /* Адаптив */
   @media (max-width: 640px) {
-    .badge-num { font-size: 72px; opacity: 0.2; }
     .pill { font-size: 15px; padding: 8px 13px 9px; }
     .voice-player { padding: 4px 12px 4px 4px; gap: 8px; }
     .vp-play { width: 30px; height: 30px; }
@@ -1065,9 +1085,11 @@ function PhraseCard({ phrase, index, learned, onToggle, isPlaying, currentTime, 
 
   return (
     <div className={`phrase-card p-6 sm:p-7 ${leaving ? 'leaving' : ''}`}>
-      <span className="badge-num">{String(index + 1).padStart(2, '0')}</span>
+      <div className="num-row">
+        <span className="num-chip">{phrase.id}</span>
+      </div>
 
-      <div className="flex flex-wrap items-start gap-3 mb-5 relative z-10">
+      <div className="flex flex-wrap items-start gap-3 mb-5 relative z-10 sm:pr-16">
         <span className="pill">
           {phrase.en} <span className="ua">— {phrase.ua}</span>
         </span>
