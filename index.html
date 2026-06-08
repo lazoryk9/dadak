@@ -101,62 +101,76 @@
   .hero-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 711 / 336;
+    aspect-ratio: 691 / 337;
   }
   .hero-stage > * { position: absolute; }
 
-  .hero-top, .hero-500, .hero-fraz {
+  .hero-top, .hero-fraz {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    font-size: 19.69cqw;
-    line-height: 1.05;
+    font-size: 20.26cqw;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     white-space: nowrap;
   }
-  .hero-top  { left: 0; top: 0; color: #fff; }
-  .hero-500  { left: 45.99%; top: 0; color: var(--accent); text-shadow: 0 5px 40px rgba(21,240,199,0.4); }
-  .hero-fraz { left: 0; top: 48.2%; color: var(--accent); }
+  .hero-top  { left: 0; top: 4.15%; color: #fff; z-index: 1; }
+  .hero-fraz { left: 0; top: 52.23%; color: var(--accent); z-index: 1; }
+
+  /* 500 — векторне зображення зі світінням */
+  .hero-500 {
+    left: 42.63%; top: -4.21%;
+    width: 50.34%;
+    aspect-ratio: 347.866 / 204.263;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0.6cqw 4cqw rgba(21,240,199,0.45));
+    pointer-events: none;
+    z-index: 1;
+  }
 
   .hero-side {
-    left: 63.15%; top: 59.2%;
+    left: 64.98%; top: 61.13%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     font-family: 'Onest', sans-serif;
     font-weight: 400;
-    font-size: 4.5cqw;
-    line-height: 1.05;
+    font-size: 4.63cqw;
+    line-height: 0.92;
     color: #fff;
     white-space: nowrap;
-    z-index: 4;
+    z-index: 2;
   }
 
   .hero-neb {
-    left: 52.6%; top: 31.5%;
-    width: 38.68%;
+    left: 54.27%; top: 36.5%;
+    width: 39.8%;
     aspect-ratio: 275 / 71;
+    transform: rotate(1.6deg);
     z-index: 5;
     pointer-events: none;
   }
   .hero-neb img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-  .hero-oval {
-    left: 54.74%; top: 55.4%;
-    width: 40.21%;
+  .hero-oval, .hero-oval2 {
+    width: 41.38%;
     aspect-ratio: 286.241 / 112.882;
     height: auto;
     object-fit: contain;
     pointer-events: none;
     z-index: 3;
   }
+  .hero-oval  { left: 56.62%; top: 57.34%; }
+  .hero-oval2 { left: 56.33%; top: 58.53%; }
+
   .hero-excl {
-    left: 86.92%; top: 61.6%;
-    width: 1.27%;
+    left: 89%; top: 63.5%;
+    width: 1.31%;
     aspect-ratio: 9.033 / 56;
     height: auto;
     object-fit: contain;
     pointer-events: none;
-    z-index: 5;
+    z-index: 6;
   }
 
   /* Pill з фразою */
@@ -1288,7 +1302,7 @@ function App() {
         <div className="hero-box mb-8">
           <h1 className="hero-stage">
             <span className="hero-top">ТОП</span>
-            <span className="hero-500">500</span>
+            <img className="hero-500" src="assets/n500.svg" alt="500" />
             <span className="hero-fraz">ФРАЗ</span>
             <span className="hero-side">
               <span>для</span>
@@ -1299,6 +1313,7 @@ function App() {
               <img src="assets/neb.png" alt="небанальних" />
             </span>
             <img className="hero-oval" src="assets/oval.svg" alt="" aria-hidden="true" />
+            <img className="hero-oval2" src="assets/oval.svg" alt="" aria-hidden="true" />
             <img className="hero-excl" src="assets/excl.svg" alt="" aria-hidden="true" />
           </h1>
         </div>
