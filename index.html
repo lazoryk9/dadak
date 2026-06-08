@@ -91,38 +91,77 @@
   }
 
   /* Бейдж "небанальних" */
-  .title-card {
+  /* ========== HERO ЗАГОЛОВОК ========== */
+  .hero-box {
     position: relative;
     display: inline-block;
-    margin-top: 30px;
-    padding: 30px 32px 30px;
-    border: 2.5px solid var(--accent);
-    border-radius: 32px;
-    box-shadow:
-      0 0 16px rgba(20,240,200,0.55),
-      0 0 40px rgba(20,240,200,0.28),
-      inset 0 0 26px rgba(20,240,200,0.10);
+    max-width: 100%;
+    margin-top: 8px;
+    background: #0a0a0b;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    padding: 38px 44px 42px;
   }
-  .nebanal-tab {
-    position: absolute;
-    top: -16px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 12;
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-weight: 800;
-    font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #0a0a0b;
-    background: var(--accent);
-    padding: 5px 16px 6px;
-    border-radius: 999px;
-    box-shadow: 0 0 18px rgba(20,240,200,0.55);
+  .hero-grid {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(18px, 3vw, 48px);
+    margin: 0;
+  }
+  .hero-title { line-height: 0.9; }
+  .hero-line1 {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(10px, 1.6vw, 22px);
+  }
+  .hero-top  { color: #fff; font-size: clamp(46px, 9.5vw, 100px); letter-spacing: -0.02em; }
+  .hero-fraz { color: var(--accent); font-size: clamp(46px, 9.5vw, 100px); letter-spacing: -0.02em; display: block; }
+  .hero-500 {
+    color: var(--accent);
+    font-size: clamp(50px, 10.5vw, 112px);
+    letter-spacing: -0.01em;
+    text-shadow: 0 0 22px rgba(20,240,200,0.6), 0 0 52px rgba(20,240,200,0.35);
+  }
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(15px, 2.2vw, 28px);
+    line-height: 1.06;
+    padding-bottom: clamp(4px, 1vw, 12px);
     white-space: nowrap;
   }
-  @media (min-width: 640px) {
-    .title-card { padding: 38px 44px 38px; border-radius: 38px; }
-    .nebanal-tab { font-size: 18px; top: -19px; padding: 6px 20px 8px; }
+  .hero-zhyttia { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-arrow { width: clamp(26px, 3vw, 46px); height: auto; color: #fff; }
+  .nebanal-sticker {
+    position: absolute;
+    top: 38%; left: 47%;
+    z-index: 6;
+    background: #fff;
+    color: #0a0a0b;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(12px, 1.7vw, 20px);
+    letter-spacing: 0.03em;
+    padding: 5px 16px 6px;
+    border-radius: 5px 14px 7px 16px;
+    transform: rotate(-5deg);
+    white-space: nowrap;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+  }
+  .hero-loop {
+    position: absolute;
+    left: 8%; right: 8%; bottom: 14px;
+    width: 84%; height: 54px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @media (max-width: 640px) {
+    .hero-box { padding: 24px 20px 28px; border-radius: 26px; }
+    .hero-side { font-size: 13px; }
+    .nebanal-sticker { top: 16%; left: 52%; font-size: 12px; padding: 4px 11px 5px; }
   }
 
   /* Pill з фразою */
@@ -1251,13 +1290,31 @@ function App() {
 
       {/* HERO */}
       <section className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-12 stagger">
-        <div className="title-card mb-8">
-          <span className="nebanal-tab">небанальних</span>
-          <h1 className="font-display font-extrabold text-[40px] sm:text-[64px] md:text-[78px] leading-[0.98] tracking-tight relative z-10">
-            ТОП 500 фраз
-            <br />
-            <span className="text-[var(--accent)]">для реального життя</span>
+        <div className="hero-box mb-8">
+          <h1 className="hero-grid font-display font-extrabold">
+            <span className="hero-title">
+              <span className="hero-line1">
+                <span className="hero-top">ТОП</span>
+                <span className="hero-500">500</span>
+              </span>
+              <span className="hero-fraz">ФРАЗ</span>
+            </span>
+            <span className="hero-side">
+              <span>для</span>
+              <span>реального</span>
+              <span className="hero-zhyttia">
+                життя
+                <svg className="hero-arrow" viewBox="0 0 62 40" fill="none" aria-hidden="true">
+                  <path d="M3 13 C 28 5, 54 12, 53 30" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round"/>
+                  <path d="M44 26 L54 31 L50 20" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </span>
           </h1>
+          <span className="nebanal-sticker">НЕБАНАЛЬНИХ</span>
+          <svg className="hero-loop" viewBox="0 0 220 90" fill="none" aria-hidden="true" preserveAspectRatio="none">
+            <path d="M8 30 C 60 78, 160 80, 212 40" stroke="rgba(255,255,255,0.55)" strokeWidth="2.4" strokeLinecap="round"/>
+          </svg>
         </div>
 
         <p className="text-white/60 text-lg sm:text-xl max-w-2xl mb-10 leading-relaxed">
