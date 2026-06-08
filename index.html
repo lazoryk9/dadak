@@ -156,38 +156,34 @@
 
   /* Яскрава плашка з номером */
   .num-row {
-    text-align: center;
+    text-align: left;
     margin-bottom: 16px;
     position: relative;
     z-index: 11;
   }
   .num-chip {
     display: inline-block;
+    min-width: 70px;
+    text-align: center;
     font-family: 'Bricolage Grotesque', sans-serif;
     font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.02em;
+    font-size: 17px;
+    letter-spacing: 0.06em;
     line-height: 1;
     color: #0a0a0b;
     background: var(--accent);
-    padding: 5px 14px 6px;
+    padding: 7px 20px 8px;
     border-radius: 999px;
     box-shadow: 0 4px 16px rgba(20,240,200,0.4);
     user-select: none;
     transition: transform .3s, box-shadow .3s;
   }
   .phrase-card:hover .num-chip {
-    transform: scale(1.06);
+    transform: scale(1.05);
     box-shadow: 0 6px 22px rgba(20,240,200,0.6);
   }
   @media (min-width: 640px) {
-    .num-row {
-      position: absolute;
-      top: 18px; right: 20px;
-      margin: 0;
-      text-align: right;
-    }
-    .num-chip { font-size: 15px; padding: 5px 15px 6px; }
+    .num-chip { min-width: 84px; font-size: 19px; padding: 8px 24px 9px; }
   }
 
   /* ========== TELEGRAM-STYLE VOICE PLAYER ========== */
@@ -1071,7 +1067,7 @@ function VoicePlayer({ phrase, isPlaying, currentTime, duration, onPlay, onSeek 
 /* ============================
    КАРТКА ФРАЗИ
    ============================ */
-function PhraseCard({ phrase, index, learned, onToggle, isPlaying, currentTime, duration, onPlay, onSeek }) {
+function PhraseCard({ phrase, num, learned, onToggle, isPlaying, currentTime, duration, onPlay, onSeek }) {
   const [leaving, setLeaving] = useState(false);
 
   const handleCheck = () => {
@@ -1086,10 +1082,10 @@ function PhraseCard({ phrase, index, learned, onToggle, isPlaying, currentTime, 
   return (
     <div className={`phrase-card p-6 sm:p-7 ${leaving ? 'leaving' : ''}`}>
       <div className="num-row">
-        <span className="num-chip">{phrase.id}</span>
+        <span className="num-chip">{num}</span>
       </div>
 
-      <div className="flex flex-wrap items-start gap-3 mb-5 relative z-10 sm:pr-16">
+      <div className="flex flex-wrap items-start gap-3 mb-5 relative z-10">
         <span className="pill">
           {phrase.en} <span className="ua">— {phrase.ua}</span>
         </span>
@@ -1215,9 +1211,15 @@ function App() {
 
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return PHRASES
-      .filter(p => !learned.includes(p.id))
-      .filter(p => !q || p.en.toLowerCase().includes(q) || p.ua.toLowerCase().includes(q));
+    const unlearned = PHRASES.filter(p => !learned.includes(p.id));
+    return unlearned
+      .map((p, i) => ({ phrase: p, num: i + 1 }))
+      .filter(({ phrase, num }) =>
+        !q ||
+        phrase.en.toLowerCase().includes(q) ||
+        phrase.ua.toLowerCase().includes(q) ||
+        String(num).includes(q)
+      );
   }, [learned, search]);
 
   const learnedPhrases = useMemo(
@@ -1295,7 +1297,7 @@ function App() {
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Шукати фразу…"
+            placeholder="Шукати фразу або номер…"
             className="w-full bg-white/[0.03] border border-white/10 rounded-full py-3 pl-11 pr-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)]/50 focus:bg-white/[0.05] transition"
           />
         </div>
@@ -1313,14 +1315,14 @@ function App() {
         ) : (
           <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              {visible.slice(0, limit).map((p) => (
+              {visible.slice(0, limit).map(({ phrase, num }) => (
                 <PhraseCard
-                  key={p.id}
-                  phrase={p}
-                  index={p.id - 1}
+                  key={phrase.id}
+                  phrase={phrase}
+                  num={num}
                   learned={false}
                   onToggle={toggle}
-                  isPlaying={playingId === p.id}
+                  isPlaying={playingId === phrase.id}
                   currentTime={currentTime}
                   duration={duration}
                   onPlay={play}
