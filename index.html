@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Unbounded:wght@800;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -101,59 +101,49 @@
   .hero-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 759.679 / 362.5;
+    aspect-ratio: 836 / 336;
   }
   .hero-stage > * { position: absolute; }
 
   .hero-top, .hero-500, .hero-fraz {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Unbounded', sans-serif;
     font-weight: 800;
-    font-size: 18.43cqw;
-    line-height: 1;
+    font-size: 16.75cqw;
+    line-height: 1.05;
     letter-spacing: -0.01em;
     white-space: nowrap;
   }
-  .hero-top  { left: 10.05%; top: 8.7%; color: #fff; }
-  .hero-500  { left: 54.81%; top: 8.7%; color: var(--accent); text-shadow: 0 5px 40px rgba(21,240,199,0.4); }
-  .hero-fraz { left: 10.05%; top: 50.1%; color: var(--accent); }
+  .hero-top  { left: 0; top: 0; color: #fff; }
+  .hero-500  { left: 51.91%; top: 0; color: var(--accent); text-shadow: 0 5px 40px rgba(21,240,199,0.4); }
+  .hero-fraz { left: 0; top: 48.2%; color: var(--accent); }
 
-  .hero-side {
-    left: 69.29%; top: 57%;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Bricolage Grotesque', sans-serif;
+  .hero-word {
+    font-family: 'Onest', sans-serif;
     font-weight: 400;
-    font-size: 4.21cqw;
-    line-height: 1.1;
+    font-size: 3.83cqw;
+    line-height: 1;
     color: #fff;
     white-space: nowrap;
   }
+  .hero-w1 { left: 65.91%; top: 58.6%; }
+  .hero-w2 { left: 69.26%; top: 68.8%; }
+  .hero-w3 { left: 81.82%; top: 79.5%; }
 
   .hero-neb {
-    left: 56.52%; top: 43.7%;
-    width: 35.67%;
-    aspect-ratio: 273 / 66.5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    left: 62.44%; top: 36.6%;
+    width: 37.56%;
+    aspect-ratio: 314 / 81;
     z-index: 5;
-  }
-  .hero-brush { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .hero-neb-text {
-    position: relative;
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-weight: 800;
-    font-size: 3.29cqw;
-    color: #000;
-    white-space: nowrap;
-    transform: rotate(-4.6deg);
-  }
-
-  .hero-loop-img {
-    left: 0; top: 0;
-    width: 100%; height: 100%;
     pointer-events: none;
-    z-index: 1;
+  }
+  .hero-neb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  .hero-curl {
+    left: 91.63%; top: 62.8%;
+    width: 8.05%;
+    height: auto;
+    pointer-events: none;
+    z-index: 4;
   }
 
   /* Pill з фразою */
@@ -1287,16 +1277,13 @@ function App() {
             <span className="hero-top">ТОП</span>
             <span className="hero-500">500</span>
             <span className="hero-fraz">ФРАЗ</span>
-            <span className="hero-side">
-              <span>для</span>
-              <span>реального</span>
-              <span>життя</span>
-            </span>
+            <span className="hero-word hero-w1">для</span>
+            <span className="hero-word hero-w2">реального</span>
+            <span className="hero-word hero-w3">життя</span>
             <span className="hero-neb">
-              <img className="hero-brush" src="assets/brush.svg" alt="" aria-hidden="true" />
-              <span className="hero-neb-text">НЕБАНАЛЬНИХ</span>
+              <img src="assets/neb.png" alt="небанальних" />
             </span>
-            <img className="hero-loop-img" src="assets/loop.svg" alt="" aria-hidden="true" />
+            <img className="hero-curl" src="assets/curl.svg" alt="" aria-hidden="true" />
           </h1>
         </div>
 
